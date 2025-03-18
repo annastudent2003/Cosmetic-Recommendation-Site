@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💌 Enhancing Beauty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(90deg, #fff7ad , #ffa9f9 );
+            text-align: center;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 30px;
+            font-family: "Lavishly Yours", cursive;
+            font-style: italic;
+            color: black;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+        }
+        .form-container {
+            margin-top: 40px;
+        }
+        select, button {
+            width: 250px;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            border: 2px solid black;
+            background: white;
+            cursor: pointer;
+        }
+        .results {
+            margin-top: 30px;
+        }
+        .product {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">💌 Enhancing Beauty</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="aboutus.html">About</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <label>Skin Type:</label>
+        <select id="skinType">
+            <option value="oily">Oily</option>
+            <option value="dry">Dry</option>
+        </select>
+        <label>Sensitivity:</label>
+        <select id="sensitivity">
+            <option value="sensitive">Sensitive</option>
+            <option value="not-sensitive">Not Sensitive</option>
+        </select>
+        <label>Skin Tone:</label>
+        <select id="skinTone">
+            <option value="fair">Fair</option>
+            <option value="medium">Medium</option>
+            <option value="dark">Dark</option>
+        </select>
+        <button onclick="fetchProducts()">Get Recommendations</button>
+    </div>
+
+    <div class="results" id="results"></div>
+
+    <script>
+        async function fetchProducts() {
+            const skinType = document.getElementById('skinType').value;
+            const sensitivity = document.getElementById('sensitivity').value;
+            const skinTone = document.getElementById('skinTone').value;
+            
+            const apiUrl = `https://makeup-api.herokuapp.com/api/v1/products.json?product_type=foundation`;
+            
+            try {
+                const response = await fetch(apiUrl);
+                const products = await response.json();
+                
+                document.getElementById('results').innerHTML = '';
+                
+                const filteredProducts = products.slice(0, 3);
+                
+                filteredProducts.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('product');
+                    productDiv.innerHTML = `
+                        <h3>${product.name}</h3>
+                        <img src="${product.image_link}" alt="${product.name}" width="150">
+                        <p>Brand: ${product.brand || 'Unknown'}</p>
+                        <p>Price: ${product.price_sign || '$'}${product.price || 'N/A'}</p>
+                        <a href="${product.product_link}" target="_blank">View Product</a>
+                    `;
+                    document.getElementById('results').appendChild(productDiv);
+                });
+            } catch (error) {
+                console.error('Error fetching products:', error);
+                document.getElementById('results').innerHTML = '<p>Error loading products. Please try again.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
