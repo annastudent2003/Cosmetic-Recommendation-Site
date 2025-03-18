@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>💌 Enhancing Beauty</title>
-    link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&display=swap" rel="stylesheet">
     
@@ -18,46 +18,39 @@
 
         html, body {
             height: 100%;
-           background: linear-gradient(90deg, #fff7ad, #ffa9f9);
+            background: linear-gradient(90deg, #fff7ad, #ffa9f9);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        nav {
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.5);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 20px 50px;
+            background: rgba(255, 255, 255, 0.5);
             backdrop-filter: blur(5px);
         }
 
         .logo {
-            font-size: 30px;
+            font-size: 35px;
             font-family: "Lavishly Yours", cursive;
             font-style: italic;
             color: black;
         }
 
-        nav ul {
-            list-style: none;
+        nav {
             display: flex;
             gap: 50px;
         }
-
-        nav ul li {
-            display: inline;
-        }
-
-        nav ul li a {
+        nav a {
             text-decoration: none;
             color: black;
-            font-weight: bold;
             font-size: 18px;
         }
 
@@ -77,13 +70,16 @@
             gap: 20px;
         }
 
-        button {
+        select {
             width: 250px;
             padding: 15px;
             font-size: 16px;
             border: 2px solid black;
             background: transparent;
             cursor: pointer;
+        }
+        a:hover{
+            text-decoration: underline;
         }
 
         .right img {
@@ -94,13 +90,8 @@
         }
 
         @media (max-width: 768px) {
-            nav {
-                flex-wrap: nowrap;
+            .header {
                 padding: 15px 30px;
-            }
-
-            nav ul {
-                gap: 30px;
             }
 
             .container {
@@ -110,28 +101,42 @@
             }
 
             .right img {
-                
-                width:60px;
-                height: 90px;
+                width: 200px;
+                height: auto;
                 margin-top: 20px;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <h1 class="logo">💌 Enhancing Beauty</h1>
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="aboutus.html">ABOUT</a></li>
-        </ul>
-    </nav>
+    <header class="header">
+        <div class="logo">💌 Enhancing Beauty</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="aboutus.html">About Us</a>
+        </nav>
+    </header>
 
     <div class="container">
         <div class="left">
-            <button>PRODUCT 1</button>
-            <button>PRODUCT 2</button>
-            <button>PRODUCT 3</button>
+            <select id="skinType">
+                <option value="">Select Skin Type</option>
+                <option value="oily">Oily</option>
+                <option value="dry">Dry</option>
+            </select>
+            
+            <select id="sensitivity">
+                <option value="">Select Sensitivity</option>
+                <option value="sensitive">Sensitive</option>
+                <option value="not-sensitive">Not Sensitive</option>
+            </select>
+            
+            <select id="skinTone">
+                <option value="">Select Skin Tone</option>
+                <option value="fair">Fair</option>
+                <option value="medium">Medium</option>
+                <option value="dark">Dark</option>
+            </select>
         </div>
         <div class="right">
             <img src="https://i.pinimg.com/1200x/63/5b/be/635bbef049c34c492a6b8c0bea0ca3ab.jpg" alt="Skincare Image">
